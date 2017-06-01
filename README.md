@@ -83,6 +83,7 @@ https://github.com/koth/kcws/blob/master/pos_train.md
 >蓝瘦香菇	4
 
 权重为一个正整数，一般4以上，越大越重要
+>切换到目录kcws-master下，运行命令$：  ./bazel-bin/kcws/cc/seg_backend_api --model_path=kcws/models/seg_model.pbtxt --vocab_path=kcws/models/basic_vocab.txt --user_dict_path=kcws/models/user_dict.txt  --max_sentence_len=80
  
 ### demo
 http://localhost:9090/
