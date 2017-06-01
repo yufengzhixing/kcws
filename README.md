@@ -68,7 +68,7 @@
    >  从 http://ojsyioumh.bkt.clouddn.com/pos_model.pbtxt 下载pos_model.pbtxt到kcws/models/目录下
 
 8. 运行web service
- >  ./bazel-bin/kcws/cc/seg_backend_api --model_path=kcws/models/seg_model.pbtxt(绝对路径到seg_model.pbtxt>)   --vocab_path=kcws/models/basic_vocab.txt   --max_sentence_len=80
+ >切换到目录kcws-master下，运行命令$：  ./bazel-bin/kcws/cc/seg_backend_api --model_path=kcws/models/seg_model.pbtxt --vocab_path=kcws/models/basic_vocab.txt   --max_sentence_len=80
 
 ### 词性标注的训练说明：
 
