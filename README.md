@@ -7,7 +7,7 @@
 
 ### 构建
 
-1. 安装好bazel代码构建工具，安装好tensorflow（目前本项目需要tf 1.0.0alpha版本以上)
+1. 安装好bazel代码构建工具(bazel版本0.4.5以上，0.5.0版本比较稳定，新版本可能有bug，需要更新BUILD文件)，安装好tensorflow（目前本项目需要tf 1.0.0alpha版本以上)
 2. 切换到本项目代码目录，运行./configure
 3. 编译后台服务 
 
