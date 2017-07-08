@@ -66,12 +66,9 @@ if __name__ == '__main__':
         input_vec=input_string_vec+complement_list
         print input_string_vec
         with tf.Session(graph=graph) as sess:
-
-            unary_score_val,transMatrix = sess.run([y,t], feed_dict={
-                x: [input_vec]  # < 45
-            })
-
             feed_dict = {x: [input_vec]}
+
+            unary_score_val,transMatrix = sess.run([y,t], feed_dict)
             # print 'transMatrix',transMatrix.shape,transMatrix
             # print 'score:',unary_score_val.shape,unary_score_val
             for tf_unary_scores_, y_, sequence_length_ in zip(
@@ -95,3 +92,6 @@ if __name__ == '__main__':
 
 
         print "*"*20,"end","*"*20
+
+
+
