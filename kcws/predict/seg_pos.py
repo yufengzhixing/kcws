@@ -127,7 +127,7 @@ if __name__ == '__main__':
         word_zero_list = [0] * (50 - num_word)
 
         for w in word_list:
-            # print w
+            print w
             word_encode = int(word_dict.get(w.encode("utf8"), 0))
             input_string_vector.append(word_encode)
             num_char = len(w)
@@ -144,10 +144,11 @@ if __name__ == '__main__':
             else:
                 continue
             char_vector += char_encode
+            char_encode = []
         char_vector = char_vector + [0] * (250 - len(char_vector))
         input_string_vector += word_zero_list
 
-        # print input_string_vector,char_vector
+        print input_string_vector,char_vector
         with tf.Session(graph=pos_graph) as sess:
             pos_feed_dict = {pos_wx: [input_string_vector],
                              pos_cx: [char_vector]}
@@ -165,3 +166,6 @@ if __name__ == '__main__':
 
 
         print "*"*20,"end","*"*20
+
+
+
