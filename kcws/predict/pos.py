@@ -50,7 +50,7 @@ if __name__ == '__main__':
 
     # for op in graph.get_operations():
     #     print(op.name,op.values())
-    strings = ['苏剑林','是','科学','空间','的','博主','。']
+    strings = ['我','爱','北京','天安门','。']
     num_word = len(strings)
     input_string_vector = []
     char_encode = []
@@ -71,6 +71,7 @@ if __name__ == '__main__':
             char_encode += char_zero_list
         else:continue
         char_vector += char_encode
+        char_encode = []
     char_vector = char_vector + [0]*(250-len(char_vector))
     input_string_vector += word_zero_list
 
