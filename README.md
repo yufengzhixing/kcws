@@ -38,7 +38,7 @@
   > 
   > 训练word2vec
   > 
-  > ./bazel-bin/third_party/word2vec/word2vec -train chars_for_w2v.txt -output vec.txt -size 50 -sample 1e-4 -negative 5 -hs 1 -binary 0 -iter 5
+  > ./bazel-bin/third_party/word2vec/word2vec -train chars_for_w2v.txt -output char_vec.txt -size 50 -sample 1e-4 -negative 5 -hs 1 -binary 0 -iter 5
   > 
   > 构建训练语料工具
   > 
@@ -46,14 +46,14 @@
   > 
   > 生成语料
   > 
-  > ./bazel-bin/kcws/train/generate_training vec.txt <语料目录> all.txt
+  > ./bazel-bin/kcws/train/generate_training char_vec.txt <语料目录> all.txt
   > 
   > 得到train.txt , test.txt文件
   > 
   > python kcws/train/filter_sentence.py all.txt
   
 4. 安装好tensorflow,切换到kcws代码目录，运行:
-  > python kcws/train/train_cws_lstm.py --word2vec_path vec.txt --train_data_path <绝对路径到train.txt> --test_data_path test.txt --max_sentence_len 80 --learning_rate 0.001
+  > python kcws/train/train_cws_lstm.py --word2vec_path char_vec.txt --train_data_path <绝对路径到train.txt> --test_data_path test.txt --max_sentence_len 80 --learning_rate 0.001
   
 5. 生成vocab
   > bazel  build kcws/cc:dump_vocab
