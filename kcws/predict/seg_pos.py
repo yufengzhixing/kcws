@@ -64,6 +64,36 @@ def getPosWeights():
     y = graph.get_tensor_by_name('prefix/Reshape_9:0')
 
     return wx,cx,t,y,graph
+def viterbi_decode(score, transition_params):
+  """Decode the highest scoring sequence of tags outside of TensorFlow.
+
+  This should only be used at test time.
+
+  Args:
+    score: A [seq_len, num_tags] matrix of unary potentials.
+    transition_params: A [num_tags, num_tags] matrix of binary potentials.
+
+  Returns:
+    viterbi: A [seq_len] list of integers containing the highest scoring tag
+        indicies.
+    viterbi_score: A float containing the score for the Viterbi sequence.
+  """
+  trellis = np.zeros_like(score)
+  backpointers = np.zeros_like(score, dtype=np.int32)
+  trellis[0] = score[0]
+
+  for t in range(1, score.shape[0]):
+    v = np.expand_dims(trellis[t - 1], 1) + transition_params
+    trellis[t] = score[t] + np.max(v, 0)
+    backpointers[t] = np.argmax(v, 0)
+
+  viterbi = [np.argmax(trellis[-1])]
+  for bp in reversed(backpointers[1:]):
+    viterbi.append(bp[viterbi[-1]])
+  viterbi.reverse()
+
+  viterbi_score = np.max(trellis[-1])
+  return viterbi, viterbi_score
 
 if __name__ == '__main__':
     char_dict = read_vocabulary('/home/di/pycharmProjects/segment/kcws-master/kcws/models/basic_vocab.txt')
@@ -102,7 +132,7 @@ if __name__ == '__main__':
                     seg_unary_score_val, input_vec, [num_string]):
 
                 seg_tf_unary_scores_ = seg_tf_unary_scores_[:num_string]
-                seg_viterbi_sequence, _ = tf.contrib.crf.viterbi_decode(
+                seg_viterbi_sequence, _ = viterbi_decode(
                     seg_tf_unary_scores_, seg_transMatrix)
 
             # print "标签为：", seg_viterbi_sequence
