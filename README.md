@@ -58,7 +58,7 @@
 5. 生成vocab
   > bazel  build kcws/cc:dump_vocab
   
-  > ./bazel-bin/kcws/cc/dump_vocab vec.txt kcws/models/basic_vocab.txt
+  > ./bazel-bin/kcws/cc/dump_vocab char_vec.txt kcws/models/basic_vocab.txt
   
 6. 导出训练好的模型
  >  python tools/freeze_graph.py --input_graph logs/graph.pbtxt  --input_checkpoint logs/model.ckpt --output_node_names  "transitions,Reshape_7"   --output_graph kcws/models/seg_model.pbtxt
